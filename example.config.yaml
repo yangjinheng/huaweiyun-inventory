@@ -1,0 +1,33 @@
+huaweicloud:
+  access_key: XXXXXXXXXXXXXXXXXXX
+  secret_key: XXXXXXXXXXXXXXXXXXX
+  project_id: 控制台-我的凭证-项目ID（具体到子项目）
+  iam_address: 在 https://developer.huaweicloud.com/endpoint 查询区域 iam 的 endpoint 地址
+
+instances:
+  - hostname: node1
+    adminpass: 123456
+    system: CentOS 7.6 64bit
+    flavorref: s2.large.2
+    subnetname: VPC 下具体的子网名称
+    rootvolume: { size: 80, volumetype: SAS }
+    datavolume:
+      - { size: 100, volumetype: SAS }
+    securitgroups: ["Sys-default", "nomad-cluster"]
+    servertags:
+      - { key: "ansible_group", value: "kubernetes ceph" }
+      - { key: "ansible_ssh_port", value: "22" }
+      - { key: "prodction", value: True }
+  - hostname: node2
+    adminpass: 123456
+    system: CentOS 7.6 64bit
+    flavorref: s2.large.2
+    subnetname: VPC 下具体的子网名称
+    rootvolume: { size: 80, volumetype: SAS }
+    datavolume:
+      - { size: 100, volumetype: SAS }
+    securitgroups: ["Sys-default", "nomad-cluster"]
+    servertags:
+      - { key: "ansible_group", value: "kubernetes ceph registry" }
+      - { key: "ansible_ssh_port", value: "22" }
+      - { key: "prodction", value: "true" }
