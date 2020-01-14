@@ -106,9 +106,9 @@ func GetImage(name string, flavor string) (Image, error) {
 			return image, nil
 		}
 	}
-	request, _ := http.NewRequest("GET", "https://ims." + config.Region +".myhuaweicloud.com/v2/cloudimages?__os_bit=64&flavor_id="+flavor+"&name="+name+"&status=active", bytes.NewBuffer([]byte("")))
+	request, _ := http.NewRequest("GET", "https://ims."+config.Region+".myhuaweicloud.com/v2/cloudimages?__os_bit=64&flavor_id="+flavor+"&name="+name+"&status=active", bytes.NewBuffer([]byte("")))
 	request.Header.Add("content-type", "application/json;charset=utf8")
-	request.Header.Add("X-Project-Id", "6de764f622104bae93d5bbb45c6e2ec9")
+	request.Header.Add("X-Project-Id", config.ProjectID)
 	config.Signature.Sign(request)
 	client := http.DefaultClient
 	resp, err := client.Do(request)

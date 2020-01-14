@@ -52,7 +52,7 @@ type Job struct {
 
 // Getjob 是根据 jobid 查询 job 的状态并返回
 func Getjob(job Job) (QueryJob, error) {
-	request, _ := http.NewRequest("GET", "https://ecs." + config.Region + ".myhuaweicloud.com/v1/" + config.ProjectID + "/jobs/"+job.JobID, nil)
+	request, _ := http.NewRequest("GET", "https://ecs."+config.Region+".myhuaweicloud.com/v1/"+config.ProjectID+"/jobs/"+job.JobID, nil)
 	request.Header.Add("content-type", "application/json;charset=utf8")
 	request.Header.Add("X-Project-Id", config.ProjectID)
 	config.Signature.Sign(request)

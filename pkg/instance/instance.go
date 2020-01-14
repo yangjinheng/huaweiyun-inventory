@@ -26,7 +26,7 @@ type Server struct {
 	FlavorRef        string               `json:"flavorRef"`
 	ImageRef         string               `json:"imageRef"`
 	RootVolume       config.RootVolume    `json:"root_volume"`
-	DataVolumes      *[]config.DataVolume `json:"data_volumes",omitempty`
+	DataVolumes      *[]config.DataVolume `json:"data_volumes,omitempty"`
 	Vpcid            string               `json:"vpcid"`
 	Nics             []Nics               `json:"nics"`
 	SecurityGroups   []SecurityGroupID    `json:"security_groups"`
@@ -119,7 +119,7 @@ func CreateServer(paramer config.Host) (Job, error) {
 		Vpcid:            subnet.VpcID,
 		RootVolume:       paramer.RootVolume,
 		DataVolumes:      &paramer.DataVolume,
-		Nics:             []Nics{Nics{SubnetID: subnet.ID}},
+		Nics:             []Nics{{SubnetID: subnet.ID}},
 		SecurityGroups:   securitygroups,
 		// Publicip:         Publicip{Eip: Eip{Iptype: "5_bgp", Bandwidth: Bandwidth{Size: 100, Sharetype: "PER", Chargemode: "traffic"}, Extendparam: EipExtendparam{ChargingMode: "postPaid"}}},
 		Extendparam: Extendparam{ChargingMode: "postPaid", IsAutoPay: "IsAutoPay"},
@@ -128,7 +128,7 @@ func CreateServer(paramer config.Host) (Job, error) {
 
 	// 创建服务器请求对象
 	serverjson, _ := json.Marshal(server)
-	request, _ := http.NewRequest("POST", "https://ecs." + config.Region + ".myhuaweicloud.com/v1/" + config.ProjectID + "/cloudservers", bytes.NewBuffer(serverjson))
+	request, _ := http.NewRequest("POST", "https://ecs."+config.Region+".myhuaweicloud.com/v1/"+config.ProjectID+"/cloudservers", bytes.NewBuffer(serverjson))
 	request.Header.Add("content-type", "application/json")
 	request.Header.Add("X-Project-Id", config.ProjectID)
 
@@ -344,7 +344,7 @@ type SysTag struct {
 
 // ShowServer 根据 ServerID 返回实例的详细信息
 func ShowServer(serverid string) (ServerElement, error) {
-	request, _ := http.NewRequest("GET", "https://ecs." + config.Region + ".myhuaweicloud.com/v1/" + config.ProjectID +"/cloudservers/"+serverid, bytes.NewBuffer([]byte("")))
+	request, _ := http.NewRequest("GET", "https://ecs."+config.Region+".myhuaweicloud.com/v1/"+config.ProjectID+"/cloudservers/"+serverid, bytes.NewBuffer([]byte("")))
 	request.Header.Add("content-type", "application/json;charset=utf8")
 	request.Header.Add("X-Project-Id", config.ProjectID)
 	config.Signature.Sign(request)

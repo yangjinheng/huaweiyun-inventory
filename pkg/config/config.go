@@ -11,7 +11,7 @@ import (
 // Signature 签名工具
 var (
 	Signature signer.Signer
-	Region string
+	Region    string
 	ProjectID string
 )
 
@@ -72,7 +72,7 @@ func LoadParamer(config string) (Config, error) {
 		return paramer, err
 	}
 	Signature = signer.Signer{
-		Key: paramer.Huaweicloud.Accesskey,
+		Key:    paramer.Huaweicloud.Accesskey,
 		Secret: paramer.Huaweicloud.Secretkey,
 	}
 	Region = strings.Split(paramer.Huaweicloud.Iamaddress, ".")[1]

@@ -17,7 +17,7 @@ instances:
     servertags:
       - { key: "ansible_group", value: "kubernetes ceph" }
       - { key: "ansible_ssh_port", value: "22" }
-      - { key: "prodction", value: True }
+      - { key: "prodction", value: "true" }
   - hostname: node2
     adminpass: 123456
     system: CentOS 7.6 64bit

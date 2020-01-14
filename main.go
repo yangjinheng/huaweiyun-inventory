@@ -105,6 +105,7 @@ func main() {
 
 	// 命令行传参为 apply 则根据配置文件创建主机，完成后返回裸格式
 	if Command == "apply" {
+		// TODO
 		fmt.Println("apply")
 	}
 }

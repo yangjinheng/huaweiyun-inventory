@@ -54,7 +54,7 @@ func GetSubnet(name string) (Subnet, error) {
 			return subnet, nil
 		}
 	}
-	request, _ := http.NewRequest("GET", "https://vpc." + config.Region +".myhuaweicloud.com/v1/" + config.ProjectID + "/subnets", bytes.NewBuffer([]byte("")))
+	request, _ := http.NewRequest("GET", "https://vpc."+config.Region+".myhuaweicloud.com/v1/"+config.ProjectID+"/subnets", bytes.NewBuffer([]byte("")))
 	request.Header.Add("content-type", "application/json;charset=utf8")
 	request.Header.Add("X-Project-Id", config.ProjectID)
 	config.Signature.Sign(request)
@@ -117,7 +117,7 @@ func GetSecurityGroups(name string) (SecurityGroup, error) {
 			return securitysroups, nil
 		}
 	}
-	request, _ := http.NewRequest("GET", "https://vpc." + config.Region +".myhuaweicloud.com/v1/" + config.ProjectID +"/security-groups", bytes.NewBuffer([]byte("")))
+	request, _ := http.NewRequest("GET", "https://vpc."+config.Region+".myhuaweicloud.com/v1/"+config.ProjectID+"/security-groups", bytes.NewBuffer([]byte("")))
 	request.Header.Add("content-type", "application/json;charset=utf8")
 	request.Header.Add("X-Project-Id", config.ProjectID)
 	config.Signature.Sign(request)
